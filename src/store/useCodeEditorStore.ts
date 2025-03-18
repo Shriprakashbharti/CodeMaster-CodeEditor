@@ -1,7 +1,9 @@
 import { CodeEditorState } from "./../types/index";
 import { LANGUAGE_CONFIG } from "@/app/(root)/_constants";
 import { create } from "zustand";
-import { Monaco } from "@monaco-editor/react";
+// import { Monaco } from "@monaco-editor/react";
+import * as monaco from "monaco-editor";
+
 
 const getInitialState = () => {
   // if we're on the server, return default values
@@ -38,12 +40,21 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
     getCode: () => get().editor?.getValue() || "",
 
-    setEditor: (editor: Monaco) => {
-      const savedCode = localStorage.getItem(`editor-code-${get().language}`);
-      if (savedCode) editor.setValue(savedCode);
+    // setEditor: (editor: Monaco) => {
+    //   const savedCode = localStorage.getItem(`editor-code-${get().language}`);
+    //   if (savedCode) editor.setValue(savedCode);
 
+    //   set({ editor });
+    // },
+
+    setEditor: (editor: monaco.editor.IStandaloneCodeEditor) => {
+      const savedCode = localStorage.getItem(`editor-code-${get().language}`);
+      if (savedCode) editor.setValue(savedCode); // ✅ Works correctly now
+    
       set({ editor });
     },
+    
+    
 
     setTheme: (theme: string) => {
       localStorage.setItem("editor-theme", theme);

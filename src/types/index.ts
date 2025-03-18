@@ -1,4 +1,38 @@
-import { Monaco } from "@monaco-editor/react";
+// import { Monaco } from "@monaco-editor/react";
+import * as monaco from "monaco-editor";
+
+// export interface CodeEditorState {
+//   language: string;
+//   fontSize: number;
+//   theme: string;
+//   output: string;
+//   isRunning: boolean;
+//   error: string | null;
+//   editor: IStandaloneCodeEditor | null;
+//   executionResult: { code: string; output: string; error: string | null } | null;
+//   getCode: () => string;
+//   setEditor: (editor: IStandaloneCodeEditor) => void;
+//   setTheme: (theme: string) => void;
+//   setFontSize: (fontSize: number) => void;
+//   setLanguage: (language: string) => void;
+//   runCode: () => Promise<void>;
+// }
+export interface CodeEditorState {
+  language: string;
+  fontSize: number;
+  theme: string;
+  output: string;
+  isRunning: boolean;
+  error: string | null;
+  editor: monaco.editor.IStandaloneCodeEditor | null;
+  executionResult: { code: string; output: string; error: string | null } | null;
+  getCode: () => string;
+  setEditor: (editor: monaco.editor.IStandaloneCodeEditor) => void;
+  setTheme: (theme: string) => void;
+  setFontSize: (fontSize: number) => void;
+  setLanguage: (language: string) => void;
+  runCode: () => Promise<void>;
+}
 import { Id } from "../../convex/_generated/dataModel";
 
 export interface Theme {
@@ -37,21 +71,37 @@ export interface ExecutionResult {
   error: string | null;
 }
 
+// export interface CodeEditorState {
+//   language: string;
+//   output: string;
+//   isRunning: boolean;
+//   error: string | null;
+//   theme: string;
+//   fontSize: number;
+//   editor: Monaco | null;
+//   executionResult: ExecutionResult | null;
+
+//   setEditor: (editor: Monaco) => void;
+//   getCode: () => string;
+//   setLanguage: (language: string) => void;
+//   setTheme: (theme: string) => void;
+//   setFontSize: (fontSize: number) => void;
+//   runCode: () => Promise<void>;
+// }
 export interface CodeEditorState {
   language: string;
+  fontSize: number;
+  theme: string;
   output: string;
   isRunning: boolean;
   error: string | null;
-  theme: string;
-  fontSize: number;
-  editor: Monaco | null;
-  executionResult: ExecutionResult | null;
-
-  setEditor: (editor: Monaco) => void;
+  editor: monaco.editor.IStandaloneCodeEditor | null;
+  executionResult: { code: string; output: string; error: string | null } | null;
   getCode: () => string;
-  setLanguage: (language: string) => void;
+  setEditor: (editor: monaco.editor.IStandaloneCodeEditor) => void;
   setTheme: (theme: string) => void;
   setFontSize: (fontSize: number) => void;
+  setLanguage: (language: string) => void;
   runCode: () => Promise<void>;
 }
 
