@@ -3,6 +3,7 @@ import { useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { useEffect, useState } from "react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
 import { Editor } from "@monaco-editor/react";
+// import * as monaco from 'monaco-editor';
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
@@ -18,11 +19,18 @@ function EditorPanel() {
 
   const mounted = useMounted();
 
+  // useEffect(() => {
+  //   const savedCode = localStorage.getItem(`editor-code-${language}`);
+  //   const newCode = savedCode || LANGUAGE_CONFIG[language].defaultCode;
+  //   if (editor) editor.setValue(newCode);
+  // }, [language, editor]);
   useEffect(() => {
+    if (!editor) return; // Ensure editor is initialized
     const savedCode = localStorage.getItem(`editor-code-${language}`);
     const newCode = savedCode || LANGUAGE_CONFIG[language].defaultCode;
-    if (editor) editor.setValue(newCode);
+    editor.getModel()?.setValue(newCode);
   }, [language, editor]);
+  
 
   useEffect(() => {
     const savedFontSize = localStorage.getItem("editor-font-size");
